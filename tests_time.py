@@ -65,4 +65,4 @@ class TestTimeFunctions(unittest.TestCase):
             "   Lower Values:  {}\n"
             "   Higher Values: {}\n"
         )
-        log.debug(statics.format(execute_time, execute_time2, execute_time3, execute_time4))
+        log.debug(statics.format(execute_time, execute_time3, execute_time2, execute_time4))
