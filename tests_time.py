@@ -57,11 +57,12 @@ class TestTimeFunctions(unittest.TestCase):
         log.debug(log_template.format('MCD: Euclides amb Bezout', n3, n4, res4, execute_time4))
 
         statics = (
-            "Time without Bezout:"
-            "   Lower Values:  {}"
-            "   Higher Values: {}"
-            "Time with Bezout:"
-            "   Lower Values:  {}"
-            "   Higher Values: {}"
+            "\n"
+            "Time without Bezout:\n"
+            "   Lower Values:  {}\n"
+            "   Higher Values: {}\n"
+            "Time with Bezout:\n"
+            "   Lower Values:  {}\n"
+            "   Higher Values: {}\n"
         )
         log.debug(statics.format(execute_time, execute_time2, execute_time3, execute_time4))
