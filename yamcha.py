@@ -1,3 +1,4 @@
+from math import sqrt
 
 
 class MCD:
@@ -22,3 +23,16 @@ class MCD:
     def bezout(n1, n2):
         n1, n2 = sorted([abs(n1), abs(n2)])
         return MCD._bezout(n1, n2)
+
+
+class PRIME:
+    @staticmethod
+    def is_prime(n):
+        if n < 2:
+            return False
+
+        for k in range(2, int(sqrt(n)) + 1):
+            if n % k == 0:
+                return False
+
+        return True
