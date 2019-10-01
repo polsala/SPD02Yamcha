@@ -45,3 +45,19 @@ class PRIME:
                 return False
 
         return True
+
+
+class FACTORS:
+    @staticmethod
+    def prime_factors(n):
+        list_pf = []
+        if n >= 2:
+            d = 2
+            while d <= sqrt(n):
+                if n % d == 0:
+                    list_pf.append(d)
+                    n /= d
+                else:
+                    d += 1
+            list_pf.append(int(n))
+        return list_pf

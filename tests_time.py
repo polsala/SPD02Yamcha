@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from mcwrapper import McWrapper as mw
-from yamcha import MCD, PRIME
+from yamcha import MCD, PRIME, FACTORS
 import sys
 import logging
 from math import pow
@@ -159,9 +159,9 @@ class TestTimeFunctions(unittest.TestCase):
         )
 
         statics_res = (
-            "\n"
+            "\n\n"
             "3 Digits Number:\n"
-            "-----------------"
+            "-----------------\n"
             "Method: is_Prime\n"
             "  - Number: {}\n"
             "  - Result: {}\n"
@@ -172,7 +172,7 @@ class TestTimeFunctions(unittest.TestCase):
             "  - Result: {}\n"
             "  - Time: {}\n\n"
             "4 Digits Number:\n"
-            "-----------------"
+            "-----------------\n"
             "Method: is_Prime\n"
             "  - Number: {}\n"
             "  - Result: {}\n"
@@ -183,7 +183,7 @@ class TestTimeFunctions(unittest.TestCase):
             "  - Result: {}\n"
             "  - Time: {}\n\n"
             "5 Digits Number:\n"
-            "-----------------"
+            "-----------------\n"
             "Method: is_Prime\n"
             "  - Number: {}\n"
             "  - Result: {}\n"
@@ -205,3 +205,37 @@ class TestTimeFunctions(unittest.TestCase):
         log.debug(statics_res)
         self.assertTrue(all([res10_prime, res10_cha, res17_prime, res17_cha, res4_cha]))
         self.assertFalse(res4_prime)
+
+    def test_time_execution_over_prime_factors(self):
+        logging.getLogger("TestTimeFunctions.test_time_execution_over_prime_factors").setLevel(logging.DEBUG)
+        log = logging.getLogger("TestTimeFunctions.test_time_execution_over_prime_factors")
+
+        n10 = 1263452836
+        n20 = 12634528361263452836
+
+        res10_cha, execute_time10_cha = mw.generic_time_execution_check(
+            FACTORS.prime_factors, n10
+        )
+
+        res20_cha, execute_time20_cha = mw.generic_time_execution_check(
+            FACTORS.prime_factors, n20
+        )
+
+        statics_r = (
+            "Method: prime_factors(n)\n"
+            "Number 10 digits:\n"
+            "N: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+            "Number 20 digits:\n"
+            "N: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+        )
+
+        log.debug(
+            statics_r.format(
+                n10, res10_cha, execute_time10_cha,
+                n20, res20_cha, execute_time20_cha
+            )
+        )

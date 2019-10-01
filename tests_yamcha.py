@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from mcwrapper import McWrapper as mw
-from yamcha import MCD, PRIME
+from yamcha import MCD, PRIME, FACTORS
 import sys
 import logging
 
@@ -57,3 +57,15 @@ class TestYamcha(unittest.TestCase):
         n6 = 1105
         self.assertTrue(PRIME.is_carmichael(n6))
         self.assertFalse(PRIME.is_prime(n6))
+
+    def test_Factors(self):
+        n10 = 126345
+        expected_1 = [3, 5, 8423]
+        n20 = 1263452836
+        expected_2 = [2, 2, 23, 13733183]
+
+        res1 = FACTORS.prime_factors(n10)
+        res2 = FACTORS.prime_factors(n20)
+
+        self.assertEqual(res1, expected_1)
+        self.assertEqual(res2, expected_2)
