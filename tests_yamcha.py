@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from mcwrapper import McWrapper as mw
-from yamcha import MCD
+from yamcha import MCD, PRIME
 import sys
 import logging
 
@@ -30,3 +30,30 @@ class TestYamcha(unittest.TestCase):
         self.assertTrue(
             all([r == expected_mcd for r in [res, res2, res3[0]]])
         )
+
+    def test_Prime(self):
+        n1 = 673
+        n2 = 7907
+        n3 = 99191
+
+        prime_charm_list = [n1, n2, n3]
+
+        is_prime_res = [PRIME.is_prime(n) for n in prime_charm_list]
+        is_carm = [PRIME.is_carmichael(n) for n in prime_charm_list]
+
+        self.assertTrue(all(is_prime_res))
+        self.assertTrue(all(is_carm))
+
+        n4 = 8
+        n5 = 64712
+        nothing = [n4, n5]
+
+        is_not_prime_res = [not PRIME.is_prime(n) for n in nothing]
+        is_not_carm = [not PRIME.is_carmichael(n) for n in nothing]
+
+        self.assertTrue(all(is_not_prime_res))
+        self.assertTrue(all(is_not_carm))
+
+        n6 = 1105
+        self.assertTrue(PRIME.is_carmichael(n6))
+        self.assertFalse(PRIME.is_prime(n6))
