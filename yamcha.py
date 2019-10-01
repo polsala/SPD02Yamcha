@@ -40,7 +40,7 @@ class PRIME:
     @staticmethod
     def is_carmichael(n):
         for b in range(2, n):
-            # If b is relatively prime to n and pow(b, n-1) % n is not 1
+            # b is relatively prime to n and pow(b, n-1) % n
             if gcd(b, n) == 1 and pow(b, n - 1, n) != 1:
                 return False
 

@@ -127,8 +127,18 @@ class TestTimeFunctions(unittest.TestCase):
         logging.getLogger("TestTimeFunctions.test_time_execution_over_is_prime_vs_carmichael").setLevel(logging.DEBUG)
         log = logging.getLogger("TestTimeFunctions.test_time_execution_over_is_prime_vs_carmichael")
 
-        n10 = 1895625673
-        n17 = 10646454924419263
+        n10 = 337
+        n17 = 31891
+        n4 = 1105  # Carmichael and not prime
+
+        # 4 Digits
+        res4_prime, execute_time4_prime = mw.generic_time_execution_check(
+            PRIME.is_prime, n4
+        )
+
+        res4_cha, execute_time4_cha = mw.generic_time_execution_check(
+            PRIME.is_carmichael, n4
+        )
 
         # 10 Digits
         res10_prime, execute_time10_prime = mw.generic_time_execution_check(
@@ -150,7 +160,7 @@ class TestTimeFunctions(unittest.TestCase):
 
         statics_res = (
             "\n"
-            "10 Digits Number:\n"
+            "3 Digits Number:\n"
             "-----------------"
             "Method: is_Prime\n"
             "  - Number: {}\n"
@@ -161,7 +171,18 @@ class TestTimeFunctions(unittest.TestCase):
             "  - Number: {}\n"
             "  - Result: {}\n"
             "  - Time: {}\n\n"
-            "17 Digits Number:\n"
+            "4 Digits Number:\n"
+            "-----------------"
+            "Method: is_Prime\n"
+            "  - Number: {}\n"
+            "  - Result: {}\n"
+            "  - Time: {}\n\n"
+            "\n"
+            "Method: carmichael\n"
+            "  - Number: {}\n"
+            "  - Result: {}\n"
+            "  - Time: {}\n\n"
+            "5 Digits Number:\n"
             "-----------------"
             "Method: is_Prime\n"
             "  - Number: {}\n"
@@ -175,8 +196,12 @@ class TestTimeFunctions(unittest.TestCase):
         ).format(
             n10, res10_prime, execute_time10_prime,
             n10, res10_cha, execute_time10_cha,
+            n4, res4_prime, execute_time4_prime,
+            n4, res4_cha, execute_time4_cha,
             n17, res17_prime, execute_time17_prime,
             n17, res17_prime, execute_time17_cha
         )
 
         log.debug(statics_res)
+        self.assertTrue(all([res10_prime, res10_cha, res17_prime, res17_cha, res4_cha]))
+        self.assertFalse(res4_prime)
