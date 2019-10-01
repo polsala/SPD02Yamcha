@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from mcwrapper import McWrapper as mw
-from yamcha import MCD, PRIME, FACTORS
+from yamcha import MCD, PRIME, FACTORS, MODULAR
 import sys
 import logging
 
@@ -69,3 +69,20 @@ class TestYamcha(unittest.TestCase):
 
         self.assertEqual(res1, expected_1)
         self.assertEqual(res2, expected_2)
+
+    def test_modular_invert(self):
+        self.assertEqual(
+            MODULAR.invert_modular(5, 11),
+            9
+        )
+
+        self.assertEqual(
+            MODULAR.invert_modular(23, 1000000007),
+            739130440
+        )
+
+        self.assertEqual(
+            MODULAR.invert_modular(5, 13425235),
+            None
+        )
+

@@ -16,8 +16,8 @@ class MCD:
         if n1 == 0:
             return n2, 0, 1
         else:
-            gcd, b_const_l, b_const_r = MCD._bezout(n2 % n1, n1)
-            return gcd, b_const_r - (n2 // n1) * b_const_l, b_const_l
+            gccd, b_const_l, b_const_r = MCD._bezout(n2 % n1, n1)
+            return gccd, b_const_r - (n2 // n1) * b_const_l, b_const_l
 
     @staticmethod
     def bezout(n1, n2):
@@ -61,3 +61,13 @@ class FACTORS:
                     d += 1
             list_pf.append(int(n))
         return list_pf
+
+
+class MODULAR:
+    @staticmethod
+    def invert_modular(n, k):
+        """O(log M) implementation"""
+        g, x, _ = MCD.bezout(n, k)
+        if g != 1:
+            return None
+        return x+k if x < 0 else x

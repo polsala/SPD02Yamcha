@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from mcwrapper import McWrapper as mw
-from yamcha import MCD, PRIME, FACTORS
+from yamcha import MCD, PRIME, FACTORS, MODULAR
 import sys
 import logging
 from math import pow
@@ -239,3 +239,33 @@ class TestTimeFunctions(unittest.TestCase):
                 n20, res20_cha, execute_time20_cha
             )
         )
+
+    def test_time_over_modular_invert(self):
+        logging.getLogger("TestTimeFunctions.test_time_over_modular_invert").setLevel(logging.DEBUG)
+        log = logging.getLogger("TestTimeFunctions.test_time_over_modular_invert")
+
+        n1 = 123
+        k1 = 223
+
+        n2 = 423432423452435345345
+        k2 = 643543552344563453453
+
+        res1, execute_time1 = mw.generic_time_execution_check(
+            MODULAR.invert_modular, n1, k1
+        )
+
+        res2, execute_time2 = mw.generic_time_execution_check(
+            MODULAR.invert_modular, n2, k2
+        )
+
+        statics_t = (
+            "\n"
+            "Number: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+            "Number: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+        )
+
+        log.debug(statics_t.format((n1, k1), res1, execute_time1, (n2, k2), res2, execute_time2))
