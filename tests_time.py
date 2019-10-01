@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from mcwrapper import McWrapper as mw
-from yamcha import MCD, PRIME
+from yamcha import MCD, PRIME, FACTORS, MODULAR
 import sys
 import logging
 from math import pow
@@ -159,9 +159,9 @@ class TestTimeFunctions(unittest.TestCase):
         )
 
         statics_res = (
-            "\n"
+            "\n\n"
             "3 Digits Number:\n"
-            "-----------------"
+            "-----------------\n"
             "Method: is_Prime\n"
             "  - Number: {}\n"
             "  - Result: {}\n"
@@ -172,7 +172,7 @@ class TestTimeFunctions(unittest.TestCase):
             "  - Result: {}\n"
             "  - Time: {}\n\n"
             "4 Digits Number:\n"
-            "-----------------"
+            "-----------------\n"
             "Method: is_Prime\n"
             "  - Number: {}\n"
             "  - Result: {}\n"
@@ -183,7 +183,7 @@ class TestTimeFunctions(unittest.TestCase):
             "  - Result: {}\n"
             "  - Time: {}\n\n"
             "5 Digits Number:\n"
-            "-----------------"
+            "-----------------\n"
             "Method: is_Prime\n"
             "  - Number: {}\n"
             "  - Result: {}\n"
@@ -205,3 +205,99 @@ class TestTimeFunctions(unittest.TestCase):
         log.debug(statics_res)
         self.assertTrue(all([res10_prime, res10_cha, res17_prime, res17_cha, res4_cha]))
         self.assertFalse(res4_prime)
+
+    def test_time_execution_over_prime_factors(self):
+        logging.getLogger("TestTimeFunctions.test_time_execution_over_prime_factors").setLevel(logging.DEBUG)
+        log = logging.getLogger("TestTimeFunctions.test_time_execution_over_prime_factors")
+
+        n10 = 1263452836
+        n20 = 12634528361263452836
+
+        res10_cha, execute_time10_cha = mw.generic_time_execution_check(
+            FACTORS.prime_factors, n10
+        )
+
+        res20_cha, execute_time20_cha = mw.generic_time_execution_check(
+            FACTORS.prime_factors, n20
+        )
+
+        statics_r = (
+            "Method: prime_factors(n)\n"
+            "Number 10 digits:\n"
+            "N: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+            "Number 20 digits:\n"
+            "N: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+        )
+
+        log.debug(
+            statics_r.format(
+                n10, res10_cha, execute_time10_cha,
+                n20, res20_cha, execute_time20_cha
+            )
+        )
+
+    def test_time_over_modular_invert(self):
+        logging.getLogger("TestTimeFunctions.test_time_over_modular_invert").setLevel(logging.DEBUG)
+        log = logging.getLogger("TestTimeFunctions.test_time_over_modular_invert")
+
+        n1 = 123
+        k1 = 223
+
+        n2 = 423432423452435345345
+        k2 = 643543552344563453453
+
+        res1, execute_time1 = mw.generic_time_execution_check(
+            MODULAR.invert_modular, n1, k1
+        )
+
+        res2, execute_time2 = mw.generic_time_execution_check(
+            MODULAR.invert_modular, n2, k2
+        )
+
+        statics_t = (
+            "\n"
+            "Number: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+            "Number: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+        )
+
+        log.debug(statics_t.format((n1, k1), res1, execute_time1, (n2, k2), res2, execute_time2))
+
+    def test_time_over_modular_exponentiation(self):
+        logging.getLogger("TestTimeFunctions.test_time_over_modular_exponentiation").setLevel(logging.DEBUG)
+        log = logging.getLogger("TestTimeFunctions.test_time_over_modular_exponentiation")
+
+        b1 = 2
+        e1 = 5
+        p1 = 13
+
+        b2 = 2988348162058574136915891421498819466320163312926952423791023078876139
+        e2 = 2351399303373464486466122544523690094744975233415544072992656881240319
+        p2 = 10 ** 40
+
+        res1, execute_time1 = mw.generic_time_execution_check(
+            MODULAR.modular_exponentiation, b1, e1, p1
+        )
+
+        res2, execute_time2 = mw.generic_time_execution_check(
+            MODULAR.modular_exponentiation, b2, e2, p2
+        )
+
+        statics_t = (
+            "\n"
+            "Number: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+            "Number: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+        )
+
+        log.debug(statics_t.format((b1, e1, p1), res1, execute_time1, (b2, e2, p2), res2, execute_time2))

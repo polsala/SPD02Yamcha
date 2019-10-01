@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from mcwrapper import McWrapper as mw
-from yamcha import MCD, PRIME
+from yamcha import MCD, PRIME, FACTORS, MODULAR
 import sys
 import logging
 
@@ -57,3 +57,37 @@ class TestYamcha(unittest.TestCase):
         n6 = 1105
         self.assertTrue(PRIME.is_carmichael(n6))
         self.assertFalse(PRIME.is_prime(n6))
+
+    def test_Factors(self):
+        n10 = 126345
+        expected_1 = [3, 5, 8423]
+        n20 = 1263452836
+        expected_2 = [2, 2, 23, 13733183]
+
+        res1 = FACTORS.prime_factors(n10)
+        res2 = FACTORS.prime_factors(n20)
+
+        self.assertEqual(res1, expected_1)
+        self.assertEqual(res2, expected_2)
+
+    def test_modular_invert(self):
+        self.assertEqual(
+            MODULAR.invert_modular(5, 11),
+            9
+        )
+
+        self.assertEqual(
+            MODULAR.invert_modular(23, 1000000007),
+            739130440
+        )
+
+        self.assertEqual(
+            MODULAR.invert_modular(5, 13425235),
+            None
+        )
+
+    def test_modular_exponentiation(self):
+        self.assertEqual(
+            MODULAR.modular_exponentiation(2, 5, 13),
+            6
+        )
