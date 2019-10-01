@@ -71,3 +71,22 @@ class MODULAR:
         if g != 1:
             return None
         return x+k if x < 0 else x
+
+    @staticmethod
+    def modular_exponentiation(base, expo, p):
+        if base == 0:
+            return 0
+        elif expo == 0:
+            return 1
+        else:
+            y = 0
+            if expo % 2 == 0:
+                y = MODULAR.modular_exponentiation(base, expo / 2, p)
+                y = (y * y) % p
+
+                # If B is Odd
+            else:
+                y = base % p
+                y = (y * MODULAR.modular_exponentiation(base, expo - 1, p) % p) % p
+
+        return (y + p) % p

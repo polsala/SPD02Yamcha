@@ -269,3 +269,35 @@ class TestTimeFunctions(unittest.TestCase):
         )
 
         log.debug(statics_t.format((n1, k1), res1, execute_time1, (n2, k2), res2, execute_time2))
+
+    def test_time_over_modular_exponentiation(self):
+        logging.getLogger("TestTimeFunctions.test_time_over_modular_exponentiation").setLevel(logging.DEBUG)
+        log = logging.getLogger("TestTimeFunctions.test_time_over_modular_exponentiation")
+
+        b1 = 2
+        e1 = 5
+        p1 = 13
+
+        b2 = 2988348162058574136915891421498819466320163312926952423791023078876139
+        e2 = 2351399303373464486466122544523690094744975233415544072992656881240319
+        p2 = 10 ** 40
+
+        res1, execute_time1 = mw.generic_time_execution_check(
+            MODULAR.modular_exponentiation, b1, e1, p1
+        )
+
+        res2, execute_time2 = mw.generic_time_execution_check(
+            MODULAR.modular_exponentiation, b2, e2, p2
+        )
+
+        statics_t = (
+            "\n"
+            "Number: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+            "Number: {}\n"
+            "Result: {}\n"
+            "Time: {}\n\n"
+        )
+
+        log.debug(statics_t.format((b1, e1, p1), res1, execute_time1, (b2, e2, p2), res2, execute_time2))

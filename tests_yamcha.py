@@ -86,3 +86,8 @@ class TestYamcha(unittest.TestCase):
             None
         )
 
+    def test_modular_exponentiation(self):
+        self.assertEqual(
+            MODULAR.modular_exponentiation(2, 5, 13),
+            6
+        )
