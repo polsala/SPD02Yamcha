@@ -83,8 +83,6 @@ class MODULAR:
             if expo % 2 == 0:
                 y = MODULAR.modular_exponentiation(base, expo / 2, p)
                 y = (y * y) % p
-
-                # If B is Odd
             else:
                 y = base % p
                 y = (y * MODULAR.modular_exponentiation(base, expo - 1, p) % p) % p
