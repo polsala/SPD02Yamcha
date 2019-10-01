@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, gcd
 
 
 class MCD:
@@ -33,6 +33,15 @@ class PRIME:
 
         for k in range(2, int(sqrt(n)) + 1):
             if n % k == 0:
+                return False
+
+        return True
+
+    @staticmethod
+    def is_carmichael(n):
+        for b in range(2, n):
+            # If b is relatively prime to n and pow(b, n-1) % n is not 1
+            if gcd(b, n) == 1 and pow(b, n - 1, n) != 1:
                 return False
 
         return True
